@@ -82,4 +82,36 @@ public class Heap {
         }
         return priorityQueue.peek().val;
     }
+
+    public int kthLargestElement(int[] arr, int k){
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        for(int i : arr){
+            priorityQueue.offer(i);
+            if(priorityQueue.size() > k){
+                priorityQueue.poll();
+            }
+        }
+        return priorityQueue.peek();
+    }
+
+    public int numberOfMeetingRooms(int[][] intervals){
+        Arrays.sort(intervals, Comparator.comparing((int[] intv) -> intv[0]));
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        int count = 0;
+        for(int[] it : intervals){
+            if(priorityQueue.size() == 0){
+                count++;
+            }else{
+                if(it[0] >= priorityQueue.peek()){
+                    priorityQueue.poll();
+                }else{
+                    count++;
+                }
+            }
+            priorityQueue.offer(it[1]);
+        }
+        return count;
+    }
+
+
 }
