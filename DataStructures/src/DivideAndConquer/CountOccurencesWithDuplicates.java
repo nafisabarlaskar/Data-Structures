@@ -1,13 +1,11 @@
 package DivideAndConquer;
 
-public class FirstAndLastElementPosition {
+public class CountOccurencesWithDuplicates {
 
-    public static int[] getFirstAndLastPosition(int[] nums, int k){
-        if(nums.length == 0){
-            return new int[]{0, 0};
-        }
-        int[] res = new int[2];
+    public static int getCount(int[] nums, int k){
 
+        int first = 0;
+        int last = 0;
         int i = 2;
         int result = -1;
 
@@ -31,19 +29,19 @@ public class FirstAndLastElementPosition {
                 }
             }
             if(searchFirst) {
-                res[0] = result;
+                first = result;
             }else{
-                res[1] = result;
+                last = result;
             }
             i--;
             searchFirst = false;
         }
-        return res;
+        return last - first + 1;
     }
 
     public static void main(String[] args){
         int nums[] = {1, 1, 2, 2, 2, 2, 2, 3, 3, 4};
-        int[] result = getFirstAndLastPosition(nums, 0);
-        System.out.println("First Position: " + result[0] + " Last Position: " + result[1]);
+        int count = getCount(nums, 2);
+        System.out.println("Count - " + count);
     }
 }
